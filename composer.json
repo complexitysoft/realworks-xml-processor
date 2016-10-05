@@ -1,0 +1,22 @@
+{
+    "name": "complexity/realworks-xml-processor",
+    "description": "Simple package used to download and process files from the RealWorks XML Feed",
+    "type": "library",
+    "license": "BSD-Clause",
+    "authors": [
+        {
+            "name": "Roemer Bakker",
+            "email": "contact@roemerbakker.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "RealworksXmlProcessor\\": "src/Complexity/realworks-xml-processor/"
+        }
+    }
+}
