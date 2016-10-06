@@ -17,5 +17,3 @@ class HousesTest extends TestCase
         var_dump($this->realworks->fetch->houses());
     }
 }
-
-$realworks = new Realworks('username', 'password', 'office');

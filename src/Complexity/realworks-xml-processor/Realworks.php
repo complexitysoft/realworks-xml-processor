@@ -6,7 +6,7 @@ use RealworksXmlProcessor\Http\Fetcher;
 
 class Realworks
 {
-    const REALWORKS_ENDPOINT = "https://roemerbakker.com/tv/objects.zip";
+    const REALWORKS_ENDPOINT    = "https://roemerbakker.com/tv/objects.zip";
 
     protected $endpoint = self::REALWORKS_ENDPOINT;
 

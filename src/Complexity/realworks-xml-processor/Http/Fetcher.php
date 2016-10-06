@@ -19,6 +19,8 @@ class Fetcher
 
     const HOUSES_FILE_PREFIX    = "WONEN_";
 
+    const HOUSES_NESTED_ELEMENT = "WoonObjecten";
+
     protected $realworks;
 
     protected $parameters;
@@ -42,14 +44,12 @@ class Fetcher
         $queryString    = http_build_query($this->parameters);
         $url            = $endpoint . '?' . $queryString;
 
-        var_dump($url);
-
         file_put_contents('temp.zip', fopen($url, 'r'));
 
-        Unarchiver::unzip('temp.zip');
-
         $fileName = self::HOUSES_FILE_PREFIX . Date('Ymd') . '.xml';
-        $parsed = XmlParser::parseToObject('./temp/' . $fileName);
+        $xml = Unarchiver::getCompressedFileContents('temp.zip', $fileName);
+
+        $parsed = simplexml_load_string($xml);
 
         $this->cleanUp();
 
@@ -58,29 +58,7 @@ class Fetcher
 
     private function cleanUp()
     {
-        chmod('./temp', 777);
         chmod('./temp.zip', 777);
-        chmod('./temp/__MACOSX', 777);
-
         unlink('./temp.zip');
-        $this->deleteDir('./temp');
-    }
-
-    private function deleteDir($dirname) {
-        if (is_dir($dirname))
-            $dir_handle = opendir($dirname);
-        if (!$dir_handle)
-            return false;
-        while($file = readdir($dir_handle)) {
-            if ($file != "." && $file != "..") {
-                if (!is_dir($dirname."/".$file))
-                    unlink($dirname."/".$file);
-                else
-                    $this->deleteDir($dirname.'/'.$file);
-            }
-        }
-        closedir($dir_handle);
-        rmdir($dirname);
-        return true;
     }
 }

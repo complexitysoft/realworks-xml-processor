@@ -2,25 +2,12 @@
 
 namespace RealworksXmlProcessor\Zip;
 
-use ZipArchive;
-
 class Unarchiver
 {
-    public static function unzip($file, $destination = './temp')
+    public static function getCompressedFileContents($zipArchive, $fileName)
     {
-        $zip = new ZipArchive();
-
-        if ($zip->open($file))
-        {
-            $zip->extractTo($destination);
-        }
-    }
-
-    /**
-     * @return \ZipArchive
-     */
-    public static function getZip()
-    {
-        return Unarchiver::$zip;
+        $path = sprintf("zip://%s#%s", $zipArchive, $fileName);
+        
+        return file_get_contents($path);
     }
 }
