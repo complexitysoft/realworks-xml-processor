@@ -3,7 +3,6 @@
 namespace RealworksXmlProcessor\Http;
 
 use RealworksXmlProcessor\Realworks;
-use RealworksXmlProcessor\Xml\XmlParser;
 use RealworksXmlProcessor\Zip\Unarchiver;
 
 class Fetcher
@@ -46,8 +45,9 @@ class Fetcher
 
         file_put_contents('temp.zip', fopen($url, 'r'));
 
-        $fileName = self::HOUSES_FILE_PREFIX . Date('Ymd') . '.xml';
-        $xml = Unarchiver::getCompressedFileContents('temp.zip', $fileName);
+//        $fileName = self::HOUSES_FILE_PREFIX . Date('Ymd') . '.xml';
+        $fileName = self::HOUSES_FILE_PREFIX . '20161006' . '.xml';
+        $xml = Unarchiver::getCompressedFileContents(getcwd() . '/temp.zip', $fileName);
 
         $parsed = simplexml_load_string($xml);
 
